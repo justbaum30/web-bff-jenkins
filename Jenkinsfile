@@ -10,7 +10,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'echo Building, oh boy'
+                sh 'echo Building, oh boy, take 2'
                 sh './gradlew assemble'
             }
         }
