@@ -3,6 +3,9 @@ pipeline {
     tools {
         jdk 'openjdk-11'
     }
+    triggers {
+        githubPush()
+    }
 
     stages {
         stage('Build') {
