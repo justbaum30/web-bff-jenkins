@@ -2,7 +2,6 @@ pipeline {
     agent any
     tools {
         jdk 'openjdk-11'
-        docker 'docker-latest'
     }
     triggers {
         githubPush()
@@ -29,7 +28,7 @@ pipeline {
             }
             steps {
                 withDockerRegistry(credentialsId: 'ecr:us-west-2:aws_admin', url: ECR_URL) {
-                    sh 'docker images'
+//                     sh 'docker images'
 //                     sh './gradlew jibDockerBuild --image=jbaumgartner/web-bff'
 //                     sh 'docker tag jbaumgartner/web-bff:latest ${ECR_IMAGE_NAME}:latest'
 //                     sh 'docker push ${ECR_IMAGE_NAME}:latest'
