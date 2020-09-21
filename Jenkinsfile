@@ -2,6 +2,7 @@ pipeline {
     agent any
     tools {
         jdk 'openjdk-11'
+        docker 'docker-latest'
     }
     triggers {
         githubPush()
