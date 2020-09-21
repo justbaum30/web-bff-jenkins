@@ -23,10 +23,10 @@ pipeline {
                 branch 'master'
             }
             environment {
-                ECR_URL = "719042170775.dkr.ecr.us-west-2.amazonaws.com/jbaumgartner/web-bff"
+                ECR_URL = '719042170775.dkr.ecr.us-west-2.amazonaws.com/jbaumgartner/web-bff'
             }
             steps {
-                withDockerRegistry(credentialsId: 'ecr:us-west-2:aws_admin', url: '${ECR_URL}') {
+                withDockerRegistry(credentialsId: 'ecr:us-west-2:aws_admin', url: ECR_URL) {
                     sh 'docker images'
 //                     sh './gradlew jibDockerBuild --image=jbaumgartner/web-bff'
 //                     sh 'docker tag jbaumgartner/web-bff:latest ${ECR_URL}:latest'
