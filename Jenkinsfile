@@ -27,12 +27,8 @@ pipeline {
                 ECR_IMAGE_NAME = '719042170775.dkr.ecr.us-west-2.amazonaws.com/jbaumgartner/web-bff'
             }
             steps {
-                script {
-                    docker.withTool('docker-latest') {
-                        docker.withRegistry(credentialsId: 'ecr:us-west-2:aws_admin', url: ECR_URL) {
-                            sh 'docker images'
-                        }
-                    }
+                withDockerRegistry(credentialsId: 'ecr:us-west-2:aws_admin', url: ECR_URL) {
+                    sh 'docker images'
                 }
 //                 withDockerTool('docker-latest') {
 //                     withDockerRegistry(credentialsId: 'ecr:us-west-2:aws_admin', url: ECR_URL) {
