@@ -31,8 +31,8 @@ pipeline {
                     sh './gradlew jibDockerBuild --image=jbaumgartner/web-bff'
                     sh 'docker tag jbaumgartner/web-bff:latest ${ECR_IMAGE_NAME}:latest'
                     sh 'docker push ${ECR_IMAGE_NAME}:latest'
-                    sh 'docker tag jbaumgartner/web-bff:latest ${ECR_IMAGE_NAME}:${env.BUILD_NUMBER}'
-                    sh 'docker push ${ECR_IMAGE_NAME}:${env.BUILD_NUMBER}'
+                    sh 'docker tag jbaumgartner/web-bff:latest ${ECR_IMAGE_NAME}:${BUILD_NUMBER}'
+                    sh 'docker push ${ECR_IMAGE_NAME}:${BUILD_NUMBER}'
                 }
             }
         }
