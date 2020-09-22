@@ -51,10 +51,9 @@ pipeline {
                 branch 'master'
             }
             steps {
-                kubernetesDeploy(kubeconfigId: 'aws_eks_kubeconfig',
-                                configs: 'kubernetes.yaml',
-                                enableConfigSubstitution: true
-                )
+                withKubeConfig([credentialsId: 'aws_eks_kubeconfig') {
+                    sh 'envsubst < kubernetes.yaml | kubectl apply -f -'
+                }
             }
         }
     }
