@@ -14,7 +14,7 @@ public class WebBffController {
 
     @GetMapping("/api/test")
     public String getTestData() {
-        return "this is a test";
+        return "this is a second test";
     }
 
     @GetMapping("/api/service1")

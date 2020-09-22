@@ -18,6 +18,6 @@ public class WebBffControllerTest {
 
     @Test
     public void getTestData_ReturnsString() {
-        assertThat(webBffController.getTestData()).isEqualTo("this is a test");
+        assertThat(webBffController.getTestData()).isEqualTo("this is a second test");
     }
 }
