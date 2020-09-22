@@ -50,10 +50,14 @@ pipeline {
             when {
                 branch 'master'
             }
+            environment {
+                AWS_DEFAULT_REGION = 'us-west-2'
+            }
             steps {
-                withKubeConfig([credentialsId: 'aws_eks_kubeconfig']) {
-                    sh 'kubectl get pods'
-                    sh 'envsubst < kubernetes.yaml | kubectl apply -f -'
+                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'aws_admin', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+                    withKubeConfig([credentialsId: 'aws_eks_kubeconfig']) {
+                        sh 'envsubst < kubernetes.yaml | kubectl apply -f -'
+                    }
                 }
             }
         }
