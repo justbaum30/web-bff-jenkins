@@ -51,8 +51,17 @@ pipeline {
                 branch 'master'
             }
             steps {
-                sh 'echo Deploy'
+                kubernetesDeploy(kubeconfigId: 'aws_eks_kubeconfig',
+                                configs: 'kubernetes.yml',
+                                enableConfigSubstitution: true
+                )
             }
+        }
+    }
+
+    post {
+        cleanup {
+            deleteDir()
         }
     }
 }
