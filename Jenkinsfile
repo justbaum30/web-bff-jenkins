@@ -52,7 +52,7 @@ pipeline {
             }
             steps {
                 kubernetesDeploy(kubeconfigId: 'aws_eks_kubeconfig',
-                                configs: 'kubernetes.yml',
+                                configs: 'kubernetes.yaml',
                                 enableConfigSubstitution: true
                 )
             }
