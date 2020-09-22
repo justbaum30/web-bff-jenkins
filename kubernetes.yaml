@@ -26,6 +26,6 @@ spec:
     spec:
       containers:
         - name: web-bff
-          image: 719042170775.dkr.ecr.us-west-2.amazonaws.com/jbaumgartner/web-bff:latest
+          image: 719042170775.dkr.ecr.us-west-2.amazonaws.com/jbaumgartner/web-bff:$BUILD_NUMBER
           ports:
             - containerPort: 8080

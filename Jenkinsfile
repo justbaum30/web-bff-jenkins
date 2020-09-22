@@ -12,10 +12,20 @@ pipeline {
             steps {
                 sh './gradlew assemble'
             }
+            post {
+                success {
+                    archiveArtifacts(artifacts: '**/build/libs/*.jar', allowEmptyArchive: true)
+                }
+            }
         }
         stage('Test') {
             steps {
                 sh './gradlew test'
+            }
+            post {
+                always {
+                    junit '**/build/test-results/test/**/TEST-*.xml'
+                }
             }
         }
         stage('Container-ize and Upload to ECR') {
