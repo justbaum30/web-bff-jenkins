@@ -6,10 +6,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class WebBffController {
 
-    private final Service1Client service1Client;
+    private final UserClient userClient;
 
-    public WebBffController(final Service1Client service1Client) {
-        this.service1Client = service1Client;
+    public WebBffController(final UserClient userClient) {
+        this.userClient = userClient;
     }
 
     @GetMapping("/api/test")
@@ -17,8 +17,8 @@ public class WebBffController {
         return "this is a second test";
     }
 
-    @GetMapping("/api/service1")
+    @GetMapping("/api/user-data")
     public String getService1Data() {
-        return service1Client.getService1Data();
+        return userClient.getUserData();
     }
 }

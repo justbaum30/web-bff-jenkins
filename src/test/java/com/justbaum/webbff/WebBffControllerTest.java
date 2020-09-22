@@ -12,7 +12,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class WebBffControllerTest {
 
     @MockBean
-    private Service1Client service1Client;
+    private UserClient userClient;
     @InjectMocks
     private WebBffController webBffController;
 

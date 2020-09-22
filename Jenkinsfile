@@ -6,6 +6,10 @@ pipeline {
     triggers {
         githubPush()
     }
+    environment {
+        ECR_IMAGE_NAME = '719042170775.dkr.ecr.us-west-2.amazonaws.com/jbaumgartner/web-bff'
+        IMAGE_TAG = sh(returnStdout: true, script: 'git rev-parse --short HEAD')
+    }
 
     stages {
         stage('Build') {
@@ -33,16 +37,16 @@ pipeline {
                 branch 'master'
             }
             environment {
-                ECR_URL = 'https://719042170775.dkr.ecr.us-west-2.amazonaws.com/jbaumgartner/web-bff'
-                ECR_IMAGE_NAME = '719042170775.dkr.ecr.us-west-2.amazonaws.com/jbaumgartner/web-bff'
+                ECR_URL = "https://${ECR_IMAGE_NAME}"
+                LOCAL_IMAGE_NAME = 'jbaumgartner/web-bff'
             }
             steps {
                 withDockerRegistry(credentialsId: 'ecr:us-west-2:aws_admin', url: ECR_URL) {
-                    sh './gradlew jibDockerBuild --image=jbaumgartner/web-bff'
-                    sh 'docker tag jbaumgartner/web-bff:latest ${ECR_IMAGE_NAME}:latest'
+                    sh './gradlew jibDockerBuild --image=${LOCAL_IMAGE_NAME}'
+                    sh 'docker tag ${LOCAL_IMAGE_NAME}:latest ${ECR_IMAGE_NAME}:latest'
                     sh 'docker push ${ECR_IMAGE_NAME}:latest'
-                    sh 'docker tag jbaumgartner/web-bff:latest ${ECR_IMAGE_NAME}:${BUILD_NUMBER}'
-                    sh 'docker push ${ECR_IMAGE_NAME}:${BUILD_NUMBER}'
+                    sh 'docker tag ${LOCAL_IMAGE_NAME}:latest ${ECR_IMAGE_NAME}:${IMAGE_TAG}'
+                    sh 'docker push ${ECR_IMAGE_NAME}:${IMAGE_TAG}'
                 }
             }
         }
