@@ -51,7 +51,7 @@ pipeline {
                 branch 'master'
             }
             steps {
-                withKubeConfig([credentialsId: 'aws_eks_kubeconfig') {
+                withKubeConfig([credentialsId: 'aws_eks_kubeconfig']) {
                     sh 'envsubst < kubernetes.yaml | kubectl apply -f -'
                 }
             }
